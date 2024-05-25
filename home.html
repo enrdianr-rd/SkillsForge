@@ -10,44 +10,46 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('company.jpg'); /* Replace 'background.jpg' with your image URL */
+            background-image: url('company.jpg');
             background-size: cover;
             background-position: center;
             color: #FFFFFF;
-            background-attachment: fixed; /* Keep background fixed */
+            background-attachment: fixed;
         }
         header {
-            background-color: #000; /* Updated navbar color */
-            color: #008080; /* Updated text color */
+            background-color: #000;
+            color: #008080;
             padding: 10px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-
         }
         h1 {
             margin: 0;
-            font-size: 24px; /* Increased font size */
-
+            font-size: 24px;
         }
         nav {
-            background-color: #f9f7f7; /* Updated navbar color */
+            background-color: #f9f7f7;
             padding: 10px;
             border-radius: 5px;
             margin-top: 20px;
             display: flex;
-            align-items: center; /* Align items horizontally */
+            align-items: center;
         }
         nav a {
-            color: #008080; /* Updated link color */
+            color: #008080;
             text-decoration: none;
             padding: 5px 10px;
-            margin: 0 10px; /* Added margin between links */
+            margin: 0 10px;
             border-radius: 5px;
             transition: background-color 0.3s ease;
         }
         nav a:hover {
-            background-color: #d1d8e0; /* Updated hover color */
+            background-color: #d1d8e0;
+        }
+        .menu-icon {
+            display: none; /* Hide menu icon by default */
+            cursor: pointer;
         }
         .sections {
             display: flex;
@@ -56,36 +58,29 @@
             gap: 5px;
             padding: 10px;
         }
-      section {
-    position: relative;
-    max-width: 800px;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    background-size: 50%; /* Make the background image cover the entire section */
-    background-position: left;
-    transition: background-image 0.5s ease;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-}
-
-
-
-
-
+        section {
+            position: relative;
+            max-width: 800px;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background-size: 50%;
+            background-position: left;
+            transition: background-image 0.5s ease;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
         h2 {
             text-align: center;
             margin-bottom: 20px;
-
         }
         p {
             text-align: justify;
             line-height: 1.8;
             margin-bottom: 20px;
-            font-size: 18px; /* Increased font size for better readability */
-             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 18px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         .fun-fact {
             background-color: #f9c74f;
@@ -97,17 +92,11 @@
             font-weight: bold;
             text-align: center;
         }
-        .section-left {
-            align-self: flex-start;
-            background-image: url('company.jpg');
-            background-size: 50%; /* Make the background image cover the entire section */
-    background-position: left; 
-        }
-        .section-right {
-            align-self: flex-end;
-            background-image: url('company.jpg');
-            background-size: 50%; /* Make the background image cover the entire section */
-    background-position: right; 
+        .section-left, .section-right {
+            width: 100%;
+            background-size: 50%;
+            background-position: center;
+            margin-bottom: 20px;
         }
         .section-img {
             width: 100%;
@@ -116,31 +105,71 @@
         }
         .footer-nav {
             display: flex;
-            justify-content: flex-end; /* Align to the right */
-            background-color: #000; /* Updated footer navbar color */
+            justify-content: flex-end;
+            background-color: #000;
             padding: 10px;
-            margin: 20px; /* Added margin */
+            margin: 20px;
         }
         .footer-nav a {
-            color: #fff; /* Updated link color */
+            color: #fff;
             text-decoration: none;
-            padding: 10px; /* Increased padding */
+            padding: 10px;
             border-radius: 5px;
             transition: background-color 0.3s ease;
         }
         .footer-nav a:hover {
-            background-color: #333; /* Updated hover color */
+            background-color: #333;
+        }
+
+        /* Media Queries */
+        @media only screen and (max-width: 600px) {
+            header {
+                padding: 10px;
+                flex-direction: column;
+                text-align: center;
+            }
+            nav {
+                flex-direction: column;
+                margin-top: 10px;
+                display: none; /* Hide navbar links by default on small screens */
+            }
+            nav.active {
+                display: flex; /* Show navbar links when active class is applied */
+            }
+            .menu-icon {
+                display: block; /* Show menu icon */
+            }
+            .menu-icon img {
+                width: 30px;
+                height: auto;
+                cursor: pointer;
+            }
+            nav a {
+                margin: 5px 0;
+            }
+            .footer-nav {
+                margin: 10px;
+            }
+            .footer-nav a {
+                padding: 5px;
+            }
+            .section-left, .section-right {
+                background-size: cover; /* Update background size */
+            }
         }
     </style>
 </head>
 <body>
     <header>
         <h1>UnityWorks Inc.</h1>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <img src="menu-icon.png" alt="Menu">
+        </div>
         <nav>
             <a href="#">Products</a>
             <a href="#">Services</a>
             <a href="#">About</a>
-            <a href="#">Careers</a>
+            <a href="careers.html">Careers</a>
             <a href="#">Community</a>
             <a href="#">News</a>
         </nav>
@@ -165,9 +194,16 @@
     </div>
     <!-- Bottom Navigation -->
     <nav class="footer-nav">
-        <a href="#">Careers</a>
+        <a href="careers.html">Careers</a>
         <a href="#">About</a>
         <a href="#">Contact Us</a>
     </nav>
+
+    <script>
+        function toggleMenu() {
+            var nav = document.querySelector('nav');
+            nav.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

@@ -88,7 +88,7 @@
 <body>
     <div class="container">
         <h1>Job Application Form</h1>
-        <form id="myForm" enctype="multipart/form-data">
+        <form id="myForm" action="thankyou.html" method="post" enctype="multipart/form-data">
             <label for="entitled-to-work">Are you entitled to work in Canada?</label>
             <div class="option-container">
                 <label class="option">
@@ -174,26 +174,107 @@
             <label for="resume">Resume (Word or PDF)</label>
             <input type="file" id="resume" name="resume" accept=".doc, .docx, .pdf" required>
             
-            <input type="submit" value="Submit Application" onclick="submitForm()">
+            <input type="submit" value="Submit Application">
         </form>
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initially, remove the "Add Work Experience" button
+            var addButton = document.querySelector('button');
+            addButton.style.display = 'none';
+        });
+
         function addWorkExperience() {
-            // Your function to add work experience
+            var workExperienceSection = document.getElementById("work-experience-section");
+
+            var workExperienceDiv = document.createElement("div");
+            workExperienceDiv.className = "work-experience";
+
+            var workExperienceLabel = document.createElement("label");
+            workExperienceLabel.textContent = "Work Experience";
+            workExperienceLabel.style.display = "block";
+            workExperienceLabel.style.marginBottom = "5px";
+
+            var removeButton = document.createElement("button");
+            removeButton.type = "button";
+            removeButton.innerText = "Remove";
+            removeButton.onclick = function() {
+                workExperienceSection.removeChild(workExperienceDiv);
+            };
+            removeButton.style.display = "block";
+            removeButton.style.marginBottom = "10px";
+
+            workExperienceDiv.appendChild(workExperienceLabel);
+            workExperienceDiv.appendChild(removeButton);
+
+            var jobTitleInput = document.createElement("input");
+            jobTitleInput.type = "text";
+            jobTitleInput.name = "job-title[]";
+            jobTitleInput.placeholder = "Job Title";
+            jobTitleInput.required = true;
+            workExperienceDiv.appendChild(jobTitleInput);
+
+            var descriptionTextarea = document.createElement("textarea");
+            descriptionTextarea.name = "description[]";
+            descriptionTextarea.placeholder = "Job Description";
+            descriptionTextarea.required = true;
+            workExperienceDiv.appendChild(descriptionTextarea);
+
+            var companyInput = document.createElement("input");
+            companyInput.type = "text";
+            companyInput.name = "company[]";
+            companyInput.placeholder = "Company";
+            companyInput.required = true;
+            workExperienceDiv.appendChild(companyInput);
+            
+            var startDateLabel = document.createElement("label");
+            startDateLabel.textContent = "Start Date";
+            workExperienceDiv.appendChild(startDateLabel);
+
+            var startDateInput = document.createElement("input");
+            startDateInput.type = "date";
+            startDateInput.name = "start-date[]";
+            startDateInput.required = true;
+            workExperienceDiv.appendChild(startDateInput);
+
+            var endDateLabel = document.createElement("label");
+            endDateLabel.textContent = "End Date";
+            workExperienceDiv.appendChild(endDateLabel);
+
+            var endDateInput = document.createElement("input");
+            endDateInput.type = "date";
+            endDateInput.name = "end-date[]";
+            endDateInput.disabled = true;
+            workExperienceDiv.appendChild(endDateInput);
+
+            var currentlyWorkHereLabel = document.createElement("label");
+            currentlyWorkHereLabel.className = "option";
+            currentlyWorkHereLabel.innerHTML = '<input type="radio" name="currently-work-here[]" value="yes" required onclick="toggleEndDate(this)"> Currently Work Here';
+            workExperienceDiv.appendChild(currentlyWorkHereLabel);
+
+            var notCurrentlyWorkHereLabel = document.createElement("label");
+            notCurrentlyWorkHereLabel.className = "option";
+            notCurrentlyWorkHereLabel.innerHTML = '<input type="radio" name="currently-work-here[]" value="no" required onclick="toggleEndDate(this)"> Not Currently Working Here';
+            workExperienceDiv.appendChild(notCurrentlyWorkHereLabel);
+
+            workExperienceSection.appendChild(workExperienceDiv);
         }
 
         function toggleEndDate(radio) {
-            // Your function to toggle end date based on radio button
+            var endDateInput = radio.parentElement.parentElement.querySelector('input[type="date"][name="end-date[]"]');
+            endDateInput.disabled = radio.value === "yes";
         }
 
         function removeWorkExperience(button) {
-            // Your function to remove work experience
+            var workExperienceSection = document.getElementById("work-experience-section");
+            workExperienceSection.removeChild(button.parentElement);
         }
-
+    </script>
+       <script>
+        // Function to submit the form and redirect to thankyou.html
         function submitForm() {
-            // Here you can add form validation if needed
-            // For simplicity, assuming the form is valid
+            // Redirect to thankyou.html
             window.location.href = "thankyou.html";
         }
     </script>
